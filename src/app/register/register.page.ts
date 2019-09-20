@@ -36,7 +36,7 @@ export class RegisterPage implements OnInit {
         const res = await  this.afAuth.auth.createUserWithEmailAndPassword(username + '@eyeonmoney.com', password)
         console.log(res)
         this.showAlert("Success", "Welcome!");
-        this.router.navigate(['/home'])
+        this.router.navigate(['/login'])
       }catch(error){
         this.showAlert("Error", error.message);
       }
