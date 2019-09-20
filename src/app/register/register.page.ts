@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 
 import { AlertController } from '@ionic/angular';
 import { stringify } from '@angular/compiler/src/util';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,9 @@ export class RegisterPage implements OnInit {
   constructor(
     public afAuth: AngularFireAuth,
     public alert: AlertController,
-    public router: Router) { }
+    public router: Router,
+    public loadingController: LoadingController
+    ) { }
 
   ngOnInit() {
   }
@@ -33,8 +36,10 @@ export class RegisterPage implements OnInit {
       }
      
       try{
-        const res = await  this.afAuth.auth.createUserWithEmailAndPassword(username + '@eyeonmoney.com', password)
+        this.Loading()
+        const res = await this.afAuth.auth.createUserWithEmailAndPassword(username + '@eyeonmoney.com', password)
         console.log(res)
+        this.loadingController.dismiss();
         this.showAlert("Success", "Welcome!");
         this.router.navigate(['/login'])
       }catch(error){
@@ -48,7 +53,15 @@ export class RegisterPage implements OnInit {
       message,
       buttons: ['Ok']
     })
-
     await alert.present();
+  }
+
+  async Loading() {
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading'
+    });
+    return await loading.present();
   }
 }
