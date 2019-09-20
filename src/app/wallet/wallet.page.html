@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title>Wallets</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  
+  <ion-content class="ion-padding">
+    <ion-list>
+  
+      <ion-item>
+        <ion-label position="floating">Name Wallet</ion-label>
+        <ion-input type="text" [(ngModel)]="namewallet"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">R$ Value Wallet</ion-label>
+        <ion-input type="number" [(ngModel)]="valuewallet"></ion-input>
+      </ion-item>
+
+      </ion-list>
+      <ion-content class="ion-padding">
+      <ion-button fill="solid" expand="block" color="primary" (click)="addwallet()">(+) Add Wallet</ion-button>
+    </ion-content>
+  </ion-content>
