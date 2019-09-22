@@ -32,10 +32,13 @@ export class LoginPage implements OnInit {
       this.router.navigate(['/home'])
     }catch(err){
       console.dir(err);
+      this.loadingController.dismiss();
       if(err.code === "auth/user-not-found") {
         this.showAlert("Error!","User not found!")
 				console.log("Usuario não encontrado")
-			}
+			}else if(err.code ==="auth/wrong-password"){
+        this.showAlert("Error!","Password wrong or invalid!")
+      }
     }
   }
 
